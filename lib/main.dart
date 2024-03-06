@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'home_screen.dart';
+import 'package:them_app/utils/colors/app_colors.dart';
+import 'package:adaptive_theme/adaptive_theme.dart';
+import 'package:them_app/utils/theme/app_theme.dart';
+import 'screen/home_screen.dart';
 
 
 
@@ -18,16 +21,21 @@ class MyApp extends StatelessWidget {
         splitScreenMode: true,
 
         builder: (_ , child) {
-          return MaterialApp(
-            debugShowCheckedModeBanner: false,
-            title: 'First Method',
-            theme: ThemeData(
 
-              primarySwatch: Colors.blue,
-              useMaterial3: true,
-              textTheme: Typography.englishLike2018.apply(fontSizeFactor: 1.sp),
-            ),
-            home: child,
+
+
+          return AdaptiveTheme(
+            light: AppTheme.lightTheme,
+            dark: AppTheme.darkTheme,
+            initial: AdaptiveThemeMode.system,
+            builder: (theme, darkTheme) {
+              return MaterialApp(
+                debugShowCheckedModeBanner: false,
+                theme: theme,
+                darkTheme: darkTheme,
+                home: HomeScreen(),
+              );
+            },
           );
         },
         child:const HomeScreen()
