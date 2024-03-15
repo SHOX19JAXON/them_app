@@ -1,37 +1,36 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'home_screen.dart';
 
+import 'package:them_app/screens/animations/animations_screen.dart';
+import 'package:them_app/screens/paint/paint_screen.dart';
+import 'package:them_app/screens/paint/screens.dart';
+import 'package:them_app/screens/paint/snow_mane.dart';
 
+void main() {
+  runApp(const MyApp());
+}
 
-void main() => runApp(MyApp());
-
-class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
+class MyApp extends StatefulWidget {
+  const MyApp({super.key});
 
   @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  @override
   Widget build(BuildContext context) {
-
     return ScreenUtilInit(
-        designSize: const Size(360, 800),
-        minTextAdapt: true,
-        splitScreenMode: true,
-
-        builder: (_ , child) {
-          return MaterialApp(
-            debugShowCheckedModeBanner: false,
-            title: 'First Method',
-            theme: ThemeData(
-
-              primarySwatch: Colors.blue,
-              useMaterial3: true,
-              textTheme: Typography.englishLike2018.apply(fontSizeFactor: 1.sp),
-            ),
-            home: child,
-          );
-        },
-        child:const HomeScreen()
-
+      designSize: const Size(375, 812),
+      builder: (context, child) {
+        ScreenUtil.init(context);
+        return MaterialApp(
+          debugShowCheckedModeBanner: false,
+          theme: ThemeData(useMaterial3: false),
+          home: child,
+        );
+      },
+      child: const Screens(),
     );
   }
 }
